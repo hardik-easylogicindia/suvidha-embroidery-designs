@@ -51,9 +51,12 @@ const HeroSection = () => {
                 asChild
                 variant="outline" 
                 size="lg" 
-                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm hover:border-callout hover:text-callout transition-all duration-300"
               >
-                <Link to="/contact">Get Custom Quote</Link>
+                <Link to="/contact">
+                  Get Custom Quote
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
 

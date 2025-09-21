@@ -4,36 +4,55 @@ import { ArrowRight, Eye, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const PortfolioPreview = () => {
-  // Mock portfolio data - in real app this would come from your data source
-  const portfolioItems = [
+  // Categories data
+  const categories = [
     {
-      id: 1,
-      title: "Bridal Net Collection",
-      category: "Luxury Nets",
-      image: "/api/placeholder/400/300",
-      description: "Intricate Schiffli work on premium net fabric",
-      featured: true
+      id: "border",
+      name: "Border",
+      description: "Elegant border designs for sarees and garments",
+      icon: "🔲",
+      designs: 85,
+      image: "/api/placeholder/400/300"
     },
     {
-      id: 2,
-      title: "Cotton Embroidery",
-      category: "Cotton Fabrics",
-      image: "/api/placeholder/400/300",
-      description: "Traditional patterns on fine cotton"
+      id: "cotton-embroidery", 
+      name: "Cotton Embroidery",
+      description: "Traditional and contemporary cotton fabric embroidery",
+      icon: "🌿",
+      designs: 120,
+      image: "/api/placeholder/400/300"
     },
     {
-      id: 3,
-      title: "Designer Motifs",
-      category: "Custom Designs",
-      image: "/api/placeholder/400/300",
-      description: "Contemporary geometric patterns"
+      id: "dry-laces",
+      name: "Dry Laces",
+      description: "Intricate dry lace patterns for premium applications",
+      icon: "✨",
+      designs: 65,
+      image: "/api/placeholder/400/300"
     },
     {
-      id: 4,
-      title: "Floral Elegance",
-      category: "Classic Patterns",
-      image: "/api/placeholder/400/300",
-      description: "Delicate floral embroidered designs"
+      id: "gpo-allover-lace",
+      name: "GPO Allover & Lace", 
+      description: "All-over patterns and delicate lace work",
+      icon: "🎭",
+      designs: 95,
+      image: "/api/placeholder/400/300"
+    },
+    {
+      id: "net-embroidery",
+      name: "Net Embroidery",
+      description: "Premium net fabrics with Schiffli embroidery",
+      icon: "🕸️",
+      designs: 110,
+      image: "/api/placeholder/400/300"
+    },
+    {
+      id: "schiffli-garments",
+      name: "Schiffli Garments",
+      description: "Complete garment embroidery solutions",
+      icon: "👗",
+      designs: 75,
+      image: "/api/placeholder/400/300"
     }
   ];
 
@@ -47,57 +66,53 @@ const PortfolioPreview = () => {
             <span className="text-accent font-medium">Our Masterpieces</span>
           </div>
           <h2 className="text-section-title mb-6">
-            Showcase of Our Finest
-            <span className="text-accent block">Embroidery Work</span>
+            Explore Our Exquisite
+            <span className="text-accent block">Design Categories</span>
           </h2>
           <p className="text-elegant max-w-3xl mx-auto">
-            Discover our extensive library of original designs, from traditional motifs to contemporary patterns. 
-            Each piece represents the perfect blend of traditional craftsmanship and modern design sensibilities.
+            From elegant borders to intricate all-over patterns, discover our comprehensive range of Schiffli embroidery categories. 
+            Each collection showcases our commitment to quality, innovation, and timeless craftsmanship.
           </p>
         </div>
 
-        {/* Portfolio Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {portfolioItems.map((item) => (
-            <Card key={item.id} className="group hover-lift border-border/50 overflow-hidden">
-              <div className="relative overflow-hidden">
-                <div className="aspect-[4/3] bg-gradient-to-br from-callout/20 to-accent/20 flex items-center justify-center">
-                  {/* Placeholder for portfolio images */}
-                  <div className="text-center">
-                    <Eye className="h-12 w-12 text-accent/50 mx-auto mb-2" />
-                    <p className="text-sm text-muted-foreground">Portfolio Image</p>
+        {/* Categories Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {categories.map((category) => (
+            <Card key={category.id} className="group hover-lift border-border/50 overflow-hidden cursor-pointer bg-gradient-to-br from-white to-secondary/30">
+              <Link to={`/category/${category.id}`} className="block">
+                <div className="relative overflow-hidden">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-callout/20 to-accent/20 flex items-center justify-center relative">
+                    <div className="text-center">
+                      <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">
+                        {category.icon}
+                      </div>
+                      <div className="absolute top-4 right-4 bg-accent/90 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        {category.designs} designs
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-smooth flex items-center justify-center">
+                    <Button variant="secondary" size="sm" className="bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30">
+                      <Eye className="h-4 w-4 mr-2" />
+                      View Collection
+                    </Button>
                   </div>
                 </div>
                 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-smooth flex items-center justify-center">
-                  <Button variant="secondary" size="sm" className="bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30">
-                    <Eye className="h-4 w-4 mr-2" />
-                    View Details
-                  </Button>
-                </div>
-
-                {/* Featured Badge */}
-                {item.featured && (
-                  <div className="absolute top-3 right-3 bg-accent px-2 py-1 rounded-full">
-                    <span className="text-xs font-semibold text-white">Featured</span>
+                <CardContent className="p-6">
+                  <h3 className="font-bold text-xl text-primary mb-3 group-hover:text-accent transition-smooth">
+                    {category.name}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {category.description}
+                  </p>
+                  <div className="mt-4 flex items-center text-accent font-medium text-sm group-hover:translate-x-1 transition-transform">
+                    Explore Collection <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
-                )}
-              </div>
-              
-              <CardContent className="p-6">
-                <div className="mb-2">
-                  <span className="text-xs font-medium text-accent uppercase tracking-wide">
-                    {item.category}
-                  </span>
-                </div>
-                <h3 className="font-bold text-primary mb-2 group-hover:text-accent transition-smooth">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {item.description}
-                </p>
-              </CardContent>
+                </CardContent>
+              </Link>
             </Card>
           ))}
         </div>
